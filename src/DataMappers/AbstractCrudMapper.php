@@ -3,7 +3,7 @@
 namespace App\DataMappers;
 
 abstract class AbstractCrudMapper{
-    protected string $path = __DIR__ . '/../Database/';
+    protected const path = __DIR__ . '/../Database/';
 
     abstract public static function create(array $data);
 
