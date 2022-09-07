@@ -7,10 +7,14 @@ use App\Router\Web;
 
 use App\Controllers\UserController;
 use App\Controllers\ErrorController;
-$router = new Web();
 
-$router->get('/login', UserController::class, 'loginPage');
-$router->get('/register', UserController::class, 'registerPage');
+
+use App\Controllers\Auth\AuthController;
+$router = new Web();
+$router->get('/', UserController::class, 'index');
+
+$router->post('/login', AuthController::class, 'login');
+$router->post('/register', AuthController::class, 'register');
 
 $router->get('/nopage', ErrorController::class, 'noPage');
 
