@@ -13,18 +13,20 @@ class AuthController{
         $userMapper = new UserDataCrudMapper();
         $users = $userMapper->findAll();
 
+
+
+
         Validator::validateLogin($data);
         $salt = "SAAAAAALTHEHE";
         $data['password'] = md5($salt. $data['password']);
 
         foreach ($users as $user){
-            $user = json_decode($user); // fixme what the actual fuck is this piece of shit
-            if ($user->login === $data['login']) {
-                if ($user->password === $data['password']) {
+            if ($user['login'] === $data['login']) {
+                if ($user['password'] === $data['password']) {
                     $_SESSION['user']['email'] = $data['email'];
                     $_SESSION['user']['login'] = $data['login'];
-                    $_SESSION['user']['name'] = $user->name;
-                    Response::jsonOK(["name"=>$user->name]);
+                    $_SESSION['user']['name'] = $user['name'];
+                    Response::jsonOK(["name"=>$user['login']]);
                 } else {
                     Response::jsonError('password', "this password is not for that account");
                 }
@@ -48,7 +50,6 @@ class AuthController{
         $salt = "SAAAAAALTHEHE"; // про динамическую соль ни слова не было))
 
         foreach ($users as $user){
-            $user = json_decode($user); // fixme what the actual fuck is this piece of shit
             if ($user->email === $data['email']){
                 Response::jsonError('email', 'already exists');
             }
