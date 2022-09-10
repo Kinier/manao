@@ -10,7 +10,13 @@ class Request{
      */
     public static function json(): array
     {
+
         $data = json_decode(file_get_contents('php://input'), true);
+        if (!$data){
+            return [];
+        }
         return $data;
     }
+
+
 }
