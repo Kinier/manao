@@ -4,24 +4,37 @@ namespace App\DataMappers;
 
 
 class UserDataCrudMapper extends AbstractCrudMapper {
-    protected string $table = 'user.json';
+    protected string $table = 'users.json';
 
-    public static function create(array $data)
-    {
-        
-    }
-
-    public static function find(int $id)
+    public function __construct()
     {
 
     }
 
-    public static function delete(int $id)
+    public  function create(array $data)
+    {
+        $database = json_decode(file_get_contents(self::path. $this->table));
+        array_push($database->users, json_encode($data));
+        file_put_contents(self::path . $this->table, json_encode($database));
+        return true;
+    }
+    // returns array
+    public  function findAll(){
+        $database = json_decode(file_get_contents(self::path. $this->table));
+        return $database->users;
+    }
+
+    public  function find(int $id)
     {
 
     }
 
-    public static function update(int $id, array $data)
+    public  function delete(int $id)
+    {
+
+    }
+
+    public  function update(int $id, array $data)
     {
 
     }
