@@ -9,12 +9,17 @@ use App\Controllers\UserController;
 use App\Controllers\ErrorController;
 
 
+use App\Middleware\AjaxMiddleware;
+
 use App\Controllers\Auth\AuthController;
 $router = new Web();
 $router->get('/', UserController::class, 'index');
 
-$router->post('/login', AuthController::class, 'login');
+$router->post('/login', AuthController::class, 'login', [
+    'middlewareFunction'=>"App\Middleware\AjaxMiddleware::isAjax"
+]);
 $router->post('/register', AuthController::class, 'register');
+$router->get('/logout', AuthController::class, 'logout');
 
 $router->get('/nopage', ErrorController::class, 'noPage');
 
