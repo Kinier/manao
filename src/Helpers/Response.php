@@ -15,17 +15,22 @@ class Response
         die();
     }
 
-    public static function jsonOK()
+    public static function jsonOK($data = null)
     {
         header("Content-Type: application/json");
-        echo json_encode(['status' => 'ok']);
+        echo json_encode(['status' => 'ok', 'data'=>$data]);
         die();
     }
 
-    public static function jsonError()
+    public static function jsonError($name = "error", $value = "unknown")
     {
         header("Content-Type: application/json");
-        echo json_encode(['status' => 'error']);
+        $answer = ['status'=>'error',
+            "error"=>[
+                'id'=>$name, 'value'=>$value
+            ]
+        ];
+        echo json_encode($answer);
         die();
     }
 
