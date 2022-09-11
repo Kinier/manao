@@ -48,7 +48,7 @@ class Validator{
 
             if ($name === 'name'){ // валидация 2 символа, только буквы it says on the first page
                 if (!preg_match("/^[a-zA-Z]{2}$/m", $data[$name])){
-                    Response::jsonError($name, 'shuold be 2 characters, only letters');
+                    Response::jsonError($name, 'must be exact 2 characters, only letters');
                 }
             }
 
