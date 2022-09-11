@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Controllers\Auth;
+
 use App\DataMappers\UserDataCrudMapper;
 use App\Helpers\Request;
 use App\Helpers\Response;
 use App\Helpers\Validator;
-class AuthController{
+
+class AuthController
+{
     public static function login()
     {
         $data = Request::json();
@@ -14,27 +17,24 @@ class AuthController{
         $users = $userMapper->findAll();
 
 
-
-
         Validator::validateLogin($data);
         $salt = "SAAAAAALTHEHE";
-        $data['password'] = md5($salt. $data['password']);
+        $data['password'] = md5($salt . $data['password']);
 
-        foreach ($users as $user){
+        foreach ($users as $user) {
             if ($user['login'] === $data['login']) {
                 if ($user['password'] === $data['password']) {
                     $_SESSION['user']['email'] = $data['email'];
                     $_SESSION['user']['login'] = $data['login'];
                     $_SESSION['user']['name'] = $user['name'];
-                    Response::jsonOK(["name"=>$user['login']]);
+                    Response::jsonOK(["name" => $user['login']]);
                 } else {
                     Response::jsonError('password', "this password is not for that account");
                 }
             }
         }
 
-            Response::jsonError('login', "User with such login doesnt exist"); // todo mb change smth
-
+        Response::jsonError('login', "User with such login doesnt exist"); // todo mb change smth
 
 
     }
@@ -49,15 +49,15 @@ class AuthController{
         Validator::validateRegister($data);
         $salt = "SAAAAAALTHEHE"; // про динамическую соль ни слова не было))
 
-        foreach ($users as $user){
-            if ($user->email === $data['email']){
+        foreach ($users as $user) {
+            if ($user->email === $data['email']) {
                 Response::jsonError('email', 'already exists');
             }
-            if ($user->login === $data['login']){
+            if ($user->login === $data['login']) {
                 Response::jsonError('login', 'already exists');
             }
         }
-        $data['password'] = md5($salt .$data['password']);
+        $data['password'] = md5($salt . $data['password']);
         unset($data['confirm_password']);
 
 
@@ -65,7 +65,7 @@ class AuthController{
         $_SESSION['user']['email'] = $data['email'];
         $_SESSION['user']['login'] = $data['login'];
         $_SESSION['user']['name'] = $data['name'];
-        Response::jsonOK(["name"=>$data['name']]);
+        Response::jsonOK(["name" => $data['name']]);
     }
 
 

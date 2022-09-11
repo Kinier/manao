@@ -2,7 +2,8 @@
 
 namespace App\Helpers;
 
-class Request{
+class Request
+{
     /**
      * uses json data from request
      * @return array ASSOCIATIVE ARRAY CONVERTED FROM JSON REQUEST
@@ -10,9 +11,8 @@ class Request{
      */
     public static function json(): array
     {
-
         $data = json_decode(file_get_contents('php://input'), true);
-        if (!$data){
+        if (!$data) {
             return [];
         }
         return $data;

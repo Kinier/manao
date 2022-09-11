@@ -7,10 +7,10 @@ use App\DataMappers\UserDataCrudMapper;
 use App\Helpers\Request;
 use App\Helpers\Response;
 
-class UserController{
+class UserController
+{
     public static function index()
     {
-
         Response::page('index');
     }
 }

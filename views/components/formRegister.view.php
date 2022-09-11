@@ -11,7 +11,8 @@
     <p class="error" id="register_form_password_error"></p>
 
     <label for="register_form_confirm_password">confirm password</label>
-    <input type="password" id="register_form_confirm_password" name="confirm_password" required placeholder="confirm password"/>
+    <input type="password" id="register_form_confirm_password" name="confirm_password" required
+           placeholder="confirm password"/>
     <p class="error" id="register_form_confirm_password_error"></p>
 
     <label for="register_form_name">name</label>

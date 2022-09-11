@@ -3,7 +3,6 @@
 namespace App\Router;
 
 
-
 use App\Controllers\UserController;
 
 class Web
@@ -24,19 +23,20 @@ class Web
         if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
             $this->isRouteFound = true;
         }
-
     }
 
     /**
      * @param $path
      * @param $controller
      * @param $method
-     *
+     * @param null $middleware
      */
     public function get($path, $controller, $method, $middleware = null)
     {
         if ($this->requestType === 'GET' && $this->requestPath === $path) {
-            if ($middleware) call_user_func($middleware['middlewareFunction'], $middleware['arg']);
+            if ($middleware) {
+                call_user_func($middleware['middlewareFunction'], $middleware['arg']);
+            }
 
 
             $controller::$method();
@@ -49,11 +49,14 @@ class Web
      * @param $path
      * @param $controller
      * @param $method
+     * @param null $middleware
      */
     public function post($path, $controller, $method, $middleware = null)
     {
         if ($this->requestType === 'POST' && $this->requestPath === $path) {
-            if ($middleware) call_user_func($middleware['middlewareFunction'], $middleware['arg']);
+            if ($middleware) {
+                call_user_func($middleware['middlewareFunction'], $middleware['arg']);
+            }
 
             $controller::$method();
             $this->isRouteFound = true;
@@ -66,7 +69,6 @@ class Web
      */
     public function done()
     {
-
         if ($this->isRouteFound === false) {
             $this->sendCustomResponse();
         }
