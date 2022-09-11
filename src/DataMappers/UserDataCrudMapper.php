@@ -19,12 +19,17 @@ class UserDataCrudMapper extends AbstractCrudMapper
 
     public function create(array $data)
     {
+        $answer = true;
         $database = json_decode(file_get_contents(self::path . $this->table), true);
         $data['id'] = count($database['users']);
         array_push($database['users'], ($data));
-        file_put_contents(self::path . $this->table, json_encode($database));
+        if (file_put_contents(self::path . $this->table, json_encode($database))){
+            return true;
+        }else{
+            return false;
+        }
 
-        return true;
+
     }
 
     // returns array

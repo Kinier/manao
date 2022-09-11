@@ -61,11 +61,13 @@ class AuthController
         unset($data['confirm_password']);
 
 
-        $userMapper->create($data);
-        $_SESSION['user']['email'] = $data['email'];
-        $_SESSION['user']['login'] = $data['login'];
-        $_SESSION['user']['name'] = $data['name'];
-        Response::jsonOK(["name" => $data['name']]);
+        if ($userMapper->create($data)){
+            $_SESSION['user']['email'] = $data['email'];
+            $_SESSION['user']['login'] = $data['login'];
+            $_SESSION['user']['name'] = $data['name'];
+            Response::jsonOK(["name" => $data['name']]);
+        };
+
     }
 
 
