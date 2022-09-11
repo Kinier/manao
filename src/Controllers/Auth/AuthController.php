@@ -27,7 +27,7 @@ class AuthController
                     $_SESSION['user']['email'] = $data['email'];
                     $_SESSION['user']['login'] = $data['login'];
                     $_SESSION['user']['name'] = $user['name'];
-                    Response::jsonOK(["name" => $user['login']]);
+                    Response::jsonOK(["name" => $user['name']]);
                 } else {
                     Response::jsonError('password', "this password is not for that account");
                 }
