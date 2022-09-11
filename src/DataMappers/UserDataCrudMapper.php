@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DataMappers;
+use App\Helpers\Response;
 
 
 class UserDataCrudMapper extends AbstractCrudMapper
@@ -9,6 +10,11 @@ class UserDataCrudMapper extends AbstractCrudMapper
 
     public function __construct()
     {
+        if (!file_exists(self::path . $this->table)){
+            file_put_contents(self::path . $this->table,
+                              json_encode(["users"=>[]])
+            );
+        }
     }
 
     public function create(array $data)
@@ -17,6 +23,7 @@ class UserDataCrudMapper extends AbstractCrudMapper
         $data['id'] = count($database['users']);
         array_push($database['users'], ($data));
         file_put_contents(self::path . $this->table, json_encode($database));
+
         return true;
     }
 
