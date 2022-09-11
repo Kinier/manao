@@ -52,7 +52,11 @@ class UserDataCrudMapper extends AbstractCrudMapper {
         $users = $database['users'];
         foreach ($users as $key => $user){
             if ($user['id'] === $id){
-                $users[$key] = array_replace($user, $data);
+                foreach($data as $dataKey => $dataValue){
+                    if (isset($user[$dataKey])){
+                        $users[$key][$dataKey] = $dataValue;
+                    }
+                }
                 $database['users'] = $users;
                 file_put_contents(self::path . $this->table, json_encode($database));
                 return true;
