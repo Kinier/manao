@@ -27,19 +27,18 @@ header{
     width: 100%;
     height: 100%;
     justify-content: space-evenly;
-    min-height: available;
 }
 
 .main > form{
     display: flex;
     flex-flow: column;
     font-family: "Droid Sans", sans-serif;
-    justify-content: space-evenly;
+    font-size: larger;
+    justify-content: flex-start;
 }
 
 .main > form > input{
     display: flex;
-    width: 250px;
     height: 40px;
     font-size: x-large;
     background-color: wheat;
