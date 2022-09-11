@@ -34,7 +34,7 @@ class AuthController
             }
         }
 
-        Response::jsonError('login', "User with such login doesnt exist"); // todo mb change smth
+        Response::jsonError('login', "User with such login doesnt exist");
 
 
     }
