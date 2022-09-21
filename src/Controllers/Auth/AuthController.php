@@ -50,10 +50,10 @@ class AuthController
         $salt = "SAAAAAALTHEHE"; // про динамическую соль ни слова не было))
 
         foreach ($users as $user) {
-            if ($user->email === $data['email']) {
+            if ($user['email'] === $data['email']) {
                 Response::jsonError('email', 'already exists');
             }
-            if ($user->login === $data['login']) {
+            if ($user['login'] === $data['login']) {
                 Response::jsonError('login', 'already exists');
             }
         }
