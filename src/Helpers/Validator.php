@@ -25,6 +25,11 @@ class Validator
                 if (mb_strlen($data[$name]) < 6) {
                     Response::jsonError($name, 'minimum is 6 symbols');
                 }
+
+                if (mb_strpos($data[$name], ' ') !== false){
+                    Response::jsonError($name, 'should not contain spaces');
+                }
+
             }
 
             if ($name === 'email') {
@@ -74,6 +79,9 @@ class Validator
             if ($name === 'login') {
                 if (mb_strlen($data[$name]) < 6) {
                     Response::jsonError($name, 'minimum is 6 symbols');
+                }
+                if (mb_strpos($data[$name], ' ') !== false){
+                    Response::jsonError($name, 'should not contain spaces');
                 }
             }
 
